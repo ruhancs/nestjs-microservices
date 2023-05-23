@@ -5,13 +5,17 @@ WORKDIR /usr/src/app
 # copia package.json para o workdir do container 
 COPY package.json ./
 COPY package-lock.json ./
+COPY tsconfig.json tsconfig.json
+COPY nest-cli.json nest-cli.json 
 
-RUN npm install
 
 # copia todo o app para o container
-COPY . .
+COPY apps/payments apps/payments
+COPY libs libs
 
-RUN npm run build
+RUN npm install -r
+
+RUN npm run build payments
 
 FROM node:alpine As production
 

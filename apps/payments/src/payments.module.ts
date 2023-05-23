@@ -12,7 +12,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       isGlobal: true,
       validationSchema: Joi.object({
         PORT: Joi.number().required(),
-        NOTIFICATION_HOST: Joi.number().required(),
+        NOTIFICATION_HOST: Joi.string().required(),
         NOTIFICATION_PORT: Joi.number().required(),
         STRIPE_API_SK: Joi.string().required(),
       }),
