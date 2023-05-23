@@ -13,9 +13,15 @@ export class ReservationsService {
     @Inject(PAYMENTS_SERVICE) private readonly paymentService: ClientProxy,
   ) {}
 
-  async create(createReservationDto: CreateReservationDto, userId: string) {
+  async create(
+    createReservationDto: CreateReservationDto,
+    { email, _id: userId }: USerDto,
+  ) {
     return this.paymentService
-      .send('create-charge', createReservationDto.charge)
+      .send('create-charge', {
+        ...createReservationDto.charge,
+        email: email,
+      })
       .pipe(
         // res resposta do stripe api
         map((res) => {

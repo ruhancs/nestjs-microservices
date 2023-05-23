@@ -1,7 +1,7 @@
 import { Controller, Get, UsePipes, ValidationPipe } from '@nestjs/common';
 import { PaymentsService } from './payments.service';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { CreateChargeDto } from '@app/common';
+import { PaymentCreateChargeDto } from './dto/paymentCreateCharge.dto';
 
 @Controller()
 export class PaymentsController {
@@ -9,7 +9,7 @@ export class PaymentsController {
 
   @MessagePattern('create-charge')
   @UsePipes(new ValidationPipe())
-  async creatCharge(@Payload() data: CreateChargeDto) {
+  async creatCharge(@Payload() data: PaymentCreateChargeDto) {
     return this.paymentsService.createCharge(data);
   }
 }
